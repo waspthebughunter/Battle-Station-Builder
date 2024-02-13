@@ -7,7 +7,7 @@
     - { repo: "https://github.com/Flangvik/SharpCollection", location: "/home/wasp/tools/SharpCollection" }
     - { repo: "https://github.com/61106960/adPEAS", location: "/home/wasp/tools/peas"}
   become: true
-  become_method: sudo
+  become_user: wasp
 
 - name: Create temporary build directory
   ansible.builtin.tempfile:
@@ -18,22 +18,21 @@
   copy:
     src: "files/githubdownload.py"
     dest: "{{ build_dir.path }}/githubdownload.py"
-    owner: root
-    group: root
+    owner: wasp
+    group: wasp
     mode: 0755
   become: true
-  become_method: sudo
+  become_user: wasp
 
 - name: "Downloading github releases"
   shell: "{{ build_dir.path }}/githubdownload.py {{ item.repo }} {{ item.regex }} {{ item.location }} {% if item.filename is defined %}{{ item.filename }}{% endif %}"
   loop:
     - { repo: "carlospolop/PEASS-ng",  regex: "linpeas.sh", location: "/home/wasp/tools/peas" }
     - { repo: "carlospolop/PEASS-ng",  regex: "winPEASx64.exe", location: "/home/wasp/tools/peas" }
-    - { repo: "BloodHoundAD/BloodHound", regex: "BloodHound-linux-x64.zip", location: "/home/wasp/tools/BloodHoundAD" }
   async: 45
   poll: 0
   become: true
-  become_method: sudo
+  become_user: wasp
 
 - name: Remove temporary build directory
   ansible.builtin.file:
