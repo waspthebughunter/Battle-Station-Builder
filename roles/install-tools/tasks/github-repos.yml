@@ -4,8 +4,8 @@
     repo: "{{ item.repo }}"
     dest: "{{ item.location }}"
   loop:
-    - { repo: "https://github.com/Flangvik/SharpCollection", location: "~/tools/SharpCollection" }
-    - { repo: "https://github.com/61106960/adPEAS", location: "~/tools/peas"}
+    - { repo: "https://github.com/Flangvik/SharpCollection", location: "/home/wasp/tools/SharpCollection" }
+    - { repo: "https://github.com/61106960/adPEAS", location: "/home/wasp/tools/peas"}
   become: true
   become_method: sudo
 
@@ -27,9 +27,9 @@
 - name: "Downloading github releases"
   shell: "{{ build_dir.path }}/githubdownload.py {{ item.repo }} {{ item.regex }} {{ item.location }} {% if item.filename is defined %}{{ item.filename }}{% endif %}"
   loop:
-    - { repo: "carlospolop/PEASS-ng",  regex: "linpeas.sh", location: "~/tools/peas" }
-    - { repo: "carlospolop/PEASS-ng",  regex: "winPEASx64.exe", location: "~/tools/peas" }
-    - { repo: "BloodHoundAD/BloodHound", regex: "BloodHound-linux-x64.zip", location: "~/tools/BloodHoundAD" }
+    - { repo: "carlospolop/PEASS-ng",  regex: "linpeas.sh", location: "/home/wasp/tools/peas" }
+    - { repo: "carlospolop/PEASS-ng",  regex: "winPEASx64.exe", location: "/home/wasp/tools/peas" }
+    - { repo: "BloodHoundAD/BloodHound", regex: "BloodHound-linux-x64.zip", location: "/home/wasp/tools/BloodHoundAD" }
   async: 45
   poll: 0
   become: true
