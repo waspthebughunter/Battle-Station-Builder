@@ -15,10 +15,9 @@
       - jq
       - pipx
       - ntpdate
-      - flameshot
       - exiftool
-      - zsh
-      - git
+      - golang
+      - gobuster
     state: latest
   become: true
   become_method: sudo

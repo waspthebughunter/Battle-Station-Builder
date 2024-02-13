@@ -4,9 +4,8 @@
     repo: "{{ item.repo }}"
     dest: "{{ item.location }}"
   loop:
-    - { repo: "https://github.com/Flangvik/SharpCollection", location: "/opt/SharpCollection" }
-    - { repo: "https://github.com/danielmiessler/SecLists", location: "/opt/SecLists" }
-    - { repo: "https://github.com/romkatv/powerlevel10k", location: "~/Repos/powerlevel10k" }
+    - { repo: "https://github.com/Flangvik/SharpCollection", location: "~/tools/SharpCollection" }
+    - { repo: "https://github.com/61106960/adPEAS", location: "~/tools/peas"}
   become: true
   become_method: sudo
 
@@ -28,13 +27,9 @@
 - name: "Downloading github releases"
   shell: "{{ build_dir.path }}/githubdownload.py {{ item.repo }} {{ item.regex }} {{ item.location }} {% if item.filename is defined %}{{ item.filename }}{% endif %}"
   loop:
-    - { repo: "jpillora/chisel",  regex: "_linux_amd64.gz", location: "/opt/chisel" }
-    - { repo: "jpillora/chisel",  regex: "_windows_amd64.gz", location: "/opt/chisel" }
-    #- { repo: "jpillora/chisel",  regex: "_darwin_amd64", location: "/opt/chisel", filename: "chisel_osx" }
-    - { repo: "carlospolop/PEASS-ng",  regex: "linpeas.sh", location: "/opt/peas" }
-    - { repo: "carlospolop/PEASS-ng",  regex: "winPEASx64.exe", location: "/opt/peas" }
-    - { repo: "WithSecureLabs/chainsaw",  regex: "chainsaw_all_", location: "/opt/" }
-    - { repo: "BloodHoundAD/BloodHound", regex: "BloodHound-linux-x64.zip", location: "/opt/" }
+    - { repo: "carlospolop/PEASS-ng",  regex: "linpeas.sh", location: "~/tools/peas" }
+    - { repo: "carlospolop/PEASS-ng",  regex: "winPEASx64.exe", location: "~/tools/peas" }
+    - { repo: "BloodHoundAD/BloodHound", regex: "BloodHound-linux-x64.zip", location: "~/tools/BloodHoundAD" }
   async: 45
   poll: 0
   become: true
