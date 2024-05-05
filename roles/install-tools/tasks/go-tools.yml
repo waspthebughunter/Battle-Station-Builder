@@ -1,0 +1,6 @@
+---
+- name: "install Kerbrute"
+  shell: go install github.com/ropnop/kerbrute@latest
+
+- name: "tools klasörüne link"
+  shell: "ln -sf $HOME/go/bin/* $HOME/tools/."

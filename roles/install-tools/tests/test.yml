@@ -1,0 +1,5 @@
+---
+- hosts: $HOSTNAME
+  remote_user: $USER
+  roles:
+    - install-tools

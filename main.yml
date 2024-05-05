@@ -1,0 +1,8 @@
+---
+- name: "Battle-Station Builder"
+  hosts: $HOSTNAME
+  connection: local
+  roles:
+    - role: "roles/install-tools"
+      users:
+        - username: "{{ ansible_user_id }}"

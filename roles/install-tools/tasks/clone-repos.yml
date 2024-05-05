@@ -1,0 +1,5 @@
+- name: "Clone and verify repos"
+  shell: "test -d {{item.location}} && rm -rf {{item.location}} && git clone {{item.repo}} {{item.location}} || git clone {{item.repo}} {{item.location}}"
+  loop:
+    - { repo: "https://github.com/Flangvik/SharpCollection.git", location: "$HOME/tools/SharpCollection" }
+    - { repo: "https://github.com/danielmiessler/SecLists.git", location: "$HOME/tools/SecLists" }
